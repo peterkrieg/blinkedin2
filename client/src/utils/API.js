@@ -16,6 +16,7 @@ export default {
 
   // Gets the job with the given id
   getJob: id => axios.get(`/api/jobs/${id}`),
+
   // Deletes the job with the given id
   deleteJob: id => axios.delete(`/api/jobs/${id}`),
 

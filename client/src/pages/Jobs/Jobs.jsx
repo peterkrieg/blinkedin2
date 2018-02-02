@@ -39,10 +39,6 @@ class Jobs extends Component {
     }
   }
 
-  onEdit = (job) => {
-    this.props.showModal({ type: 'editJob', job });
-  }
-
   onRemove = (job) => {
     swal({
       title: 'Do you really want to remove this Job?',
@@ -84,6 +80,7 @@ class Jobs extends Component {
 
   render() {
     const { jobs, status, message } = this.state;
+    const { showModal } = this.props;
 
     return (
       <div className="full-content">
@@ -102,14 +99,22 @@ class Jobs extends Component {
                   <Row>
                     <Col>
                       <CardTitle>{job.title}</CardTitle>
-                      <CardSubtitle>{job.company}</CardSubtitle>
+                      <CardSubtitle>{job.companyName}</CardSubtitle>
                     </Col>
                     <Col className="ml-auto">
                       <Row className="h-100 justify-content-end align-items-center">
                         <Button
                           className="mx-2"
+                          color="success"
+                          onClick={() => showModal({ type: 'viewJob', job })}
+                          disabled={status === 'saving'}
+                        >
+                          View
+                        </Button>
+                        <Button
+                          className="mx-2"
                           color="warning"
-                          onClick={() => this.onEdit(job)}
+                          onClick={() => showModal({ type: 'editJob', job })}
                           disabled={status === 'saving'}
                         >
                           Edit
